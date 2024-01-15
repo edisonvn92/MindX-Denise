@@ -1,0 +1,20 @@
+
+#app-sidebar {
+  width: 15.5%;
+  .sidebar-logo {
+    display: block;
+    span {
+      display: block;
+      padding: 16px;
+    }
+    img {
+      width: 88px;
+      height: 40px;
+    }
+  }
+  ul {
+    li {
+      white-space: nowrap;
+    }
+  }
+}

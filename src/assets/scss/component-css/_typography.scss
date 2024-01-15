@@ -1,0 +1,123 @@
+$font-primary: sans-serif;
+$font-secondary: serif;
+
+/* type scale */
+$font-weight-all: ( 
+light: 300,
+regular: 400,
+semibold: 600,
+bold: 700);
+
+$font-family: ('Exo', sans-serif,serif,);
+
+$font-scale: (
+    heading: (xxs: (font-size: 12, line-height: 16),
+        xs: (font-size: 14, line-height: 20),
+        s: (font-size: 16, line-height: 24),
+        m: (font-size: 24, line-height: 32),
+        l: (font-size: 32, line-height: 40),
+        xl: (font-size: 40, line-height: 48),
+        xxl: (font-size: 48, line-height: 64),
+        xxxl: (font-size: 56, line-height: 72),
+        xxxxl: (font-size: 72, line-height: 88),
+
+    ),
+    body: (xs: (font-size: 12, line-height: 12),
+        s: (font-size: 14, line-height: 14),
+        m: (font-size: 16, line-height: 20),
+        l: (font-size: 18, line-height: 22),
+        xl: (font-size: 20, line-height: 24),
+        xxl: (font-size: 24, line-height: 32),
+    ),
+    detail: (s: (font-size: 14, line-height: 18),
+        m: (font-size: 16, line-height: 20),
+        l: (font-size: 18, line-height: 24),
+        xl: (font-size: 20, line-height: 28),
+
+    )) ;
+$font-scale-data: (
+    heading: (xxs,
+        xs,
+        s,
+        m,
+        l,
+        xl,
+        xxl,
+        xxxl,
+
+    ),
+    body: (xs,
+        s,
+        m,
+        l,
+        xl,
+        xxl,
+    ),
+    detail: (s,
+        m,
+        l,
+        xl,
+
+    ));
+
+@function get-scale($name, $font-scale: $font-scale) {
+    @return map-get($font-scale, $name
+);
+}
+
+@function get-scale-level($name, $level, $font-scale: $font-scale) {
+    @return map-get(get-scale($name, $font-scale), $level);
+}
+
+@function get-font-size($name, $level, $font-scale: $font-scale) {
+    @return convert-to-px(map-get(get-scale-level($name, $level, $font-scale), font-size)) ;
+}
+
+@function get-line-height($name, $level, $font-scale: $font-scale) {
+    @return convert-to-px(map-get(get-scale-level($name, $level, $font-scale), line-height));
+}
+
+@function convert-to-px($value) {
+    @if (type-of($value)==number and $value !=0) {
+        $value: if(unitless($value), $value * 1px, $value);
+    }
+    @return $value;
+}
+
+
+
+@mixin font-size($size, $line-height: $size) {
+    font-size: convert-to-px($size) !important;
+    line-height: convert-to-px($line-height) !important;
+}
+
+@mixin font-weight($weight) {
+    font-weight: $weight
+}
+
+@mixin fs($level, $name: heading) {
+    @include font-size(get-font-size($name, $level), get-line-height($name, $level));
+}
+
+@each $name,
+$levels in $font-scale-data {
+    @each $level in $levels {
+        .size-custom-#{$name}-#{$level} {
+            @include fs($level, $name);
+        }
+    }
+}
+@each $name,$style in $font-weight-all {
+    .weight-custom-#{$name} {
+        font-weight: $style;
+    }
+}
+
+@each $name in $font-family {
+    .family-custom-#{$name} {
+        font-family: $name;
+    }
+}
+.ant-typography {
+    color: unset;
+} 

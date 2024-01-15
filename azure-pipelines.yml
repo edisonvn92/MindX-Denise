@@ -1,0 +1,117 @@
+trigger:
+  - master
+  - develop
+variables:
+  tag: '$(Build.BuildId)'
+  branch: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+  - stage: Prepare
+    jobs:
+      - job: 'Lint_And_Code_Style'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '16.x'
+            displayName: 'Install Node.js'
+          - task: DownloadSecureFile@1
+            name: 'npmrc'
+            inputs:
+              secureFile: '.npmrc'
+
+          - task: CopyFiles@2
+            displayName: 'Copy npmrc file'
+            inputs:
+              SourceFolder: '$(Agent.TempDirectory)'
+              Contents: '.npmrc'
+              TargetFolder: '.'
+              OverWrite: true
+          - script: |
+              npm install -g pnpm
+              pnpm install --ignore-scripts --no-frozen-lockfile
+            displayName: 'Dependencies install'
+          - script: |
+              pnpm lint
+            displayName: 'Lint & Code style'
+      - job: Sonar_Report
+        steps:
+          - task: SonarQubePrepare@5
+            displayName: 'Prepare analysis on SonarQube'
+            inputs:
+              SonarQube: SonarQube
+              scannerMode: 'CLI'
+              configMode: manual
+              cliProjectKey: 'mindx-denise_mindx-denise-mvp-web_AYvXTUKog2l4uRz9C7c2'
+              cliProjectName: 'mindx-crm-web'
+          - task: SonarQubeAnalyze@5
+          - task: SonarQubePublish@5
+            inputs:
+              pollingTimeoutSec: '300'
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+  - stage: 'Build_And_Publish'
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'specific'
+              project: '8f123839-0490-4346-82e6-23ed300c6220'
+              definition: '342'
+              buildVersionToDownload: 'latest'
+              targetPath: '$(Pipeline.Workspace)'
+          - script: |
+              prefix="development"
+              if [[ '$(branch)' == 'master' ]]; then
+                prefix="production"
+              else
+                echo 'skip change path config'
+              fi
+              ls -al '$(Pipeline.Workspace)'
+              unzip $(Pipeline.Workspace)/drop/release.zip -d $(Build.SourcesDirectory)/denise-config
+              ls -al $(Build.SourcesDirectory)/denise-config
+              cp -R $(Build.SourcesDirectory)/denise-config/s/environments/$prefix/client/* $(Build.SourcesDirectory)/src/config
+              mv $(Build.SourcesDirectory)/src/config/override.config.ts $(Build.SourcesDirectory)/src/config/override.config.ts
+              cat $(Build.SourcesDirectory)/src/config/override.config.ts
+              rm -rf $(Build.SourcesDirectory)/denise-config
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '16.x'
+            displayName: 'Install Node.js'
+          - task: DownloadSecureFile@1
+            name: 'npmrc'
+            inputs:
+              secureFile: '.npmrc'
+
+          - task: CopyFiles@2
+            displayName: 'Copy npmrc file'
+            inputs:
+              SourceFolder: '$(Agent.TempDirectory)'
+              Contents: '.npmrc'
+              TargetFolder: '.'
+              OverWrite: true
+          - script: |
+              npm install -g pnpm
+              pnpm install --ignore-scripts --no-frozen-lockfile
+            displayName: 'Dependencies install'
+          - script: |
+              NODE_OPTIONS=--max-old-space-size=16000 pnpm run build
+            displayName: 'Build'
+          - task: Docker@2
+            displayName: Build Docker
+            inputs:
+              command: 'buildAndPush'
+              repository: mindx-denise-mvp-web
+              ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+                containerRegistry: docker-registry-prod
+              ${{ else }}:
+                containerRegistry: docker-registry-dev
+              dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+              tags: $(Build.BuildId)
+          - script: |
+              rm -rf node_modules
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(Build.SourcesDirectory)'
+    condition: eq(variables['Build.Reason'], 'IndividualCI')

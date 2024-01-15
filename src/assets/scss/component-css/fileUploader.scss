@@ -1,0 +1,31 @@
+@use "sass:map";
+$colorBgItem: map.get($colors, 'gray-50');
+$colorBorderItem: map.get($colors, 'gray-200');
+$colorError: map.get($colors, 'brand-500');
+$textColor: map.get($colors, 'gray-900');
+
+.ant-upload-select {
+    width: 100% !important;
+}
+
+.ant-upload-list-item-container {
+    width: 100%;
+    .ant-upload-list-item {
+        background-color: $colorBgItem;
+        height: 40px !important;
+        border-radius: 8px;
+        border: 1px solid $colorBorderItem;
+        padding: 8px;
+        
+        .ant-upload-icon {
+            display: none;
+        }
+        &.ant-upload-list-item-error {
+            border: 3px solid $colorError;
+            .ant-upload-list-item-name {
+                color: $textColor !important;
+            }
+            
+        }
+    }
+}

@@ -1,0 +1,8 @@
+div[role=dialog] {
+    z-index: 10000;
+}
+.modal-mask {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    z-index: 1000 !important;
+}

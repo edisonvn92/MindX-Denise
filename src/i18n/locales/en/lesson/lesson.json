@@ -1,0 +1,15 @@
+{
+    "slide": "Slide",
+    "cover": "Cover",
+    "pictureAndText": "Ảnh + Text",
+    "video": "Video",
+    "quiz": "Quiz",
+    "header": "Tiêu đề",
+    "lessonLogo": "Logo khóa học",
+    "lessonNumber": "Số bài học",
+    "lessonName": "Tên bài học",
+    "learningTime": "Thời gian học (phút)",
+    "coverImage": "Ảnh bìa",
+    "sectionNumber": "Số section",
+    "sectionName": "Tên section"
+}

@@ -1,0 +1,14 @@
+.select-button {
+  border-width: 1px !important;
+  &:disabled {
+    background-color: #cfcfcf;
+    color: #a6a6a6;
+    &:active {
+      background-color: #cfcfcf;
+      color: #a6a6a6;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+}

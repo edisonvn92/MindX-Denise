@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: registry.mindx.edu.vn/mindx-denise-mvp-web
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  type: NodePort
+  ports:
+    http:
+      enabled: true
+      port: 80
+      targetPort: 80
+      nodePort: 32101
+    grpc:
+      enabled: false
+      #port: 50000
+      #targetPort: 50000
+containers:
+  port: 80
+  grpcPort: 50000
+tolerations:
+  key: "node-services"
+  operator: "Equal"
+  value: "denise"
+  effect: "NoSchedule"

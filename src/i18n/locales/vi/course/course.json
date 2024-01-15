@@ -1,0 +1,20 @@
+{
+    "courseSummary": "Tổng hợp khóa học",
+    "addCourse": "Thêm khóa học",
+    "editCourse": "Chỉnh sửa khóa học",
+    "courseName": "Tên khóa học",
+    "courseCode": "Mã khóa học",
+    "courseThumbnail": "Cover khóa học",
+    "courseThumbnailRecommendation": "Ảnh Cover khóa học được khuyến nghị có tỷ lệ 16:9 và dung lượng không quá 1MB",
+    "codeRequired": "Mã khóa học bắt buộc",
+    "nameRequired": "Tên khóa học bắt buộc",
+    "thumbnailRequired": "Cover khóa học bắt buộc",
+    "lessonNo": "Bài {{lessonNo}}",
+    "addLesson": "Thêm bài học",
+    "minutesStudy": "{{min}} phút học",
+    "createCourseSuccessfully": "Đã thêm khóa học thành công",
+    "updateCourseSuccessfully": "Đã chỉnh sửa khóa học thành công",
+    "doYouWantToDeleteLesson": "Bạn có chắc chắn muốn xóa bài học này?",
+    "deleteLessonSuccessfully": "Đã xóa bài học thành công"
+
+}

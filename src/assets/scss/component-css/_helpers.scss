@@ -1,0 +1,5 @@
+@use "sass:map";
+ @mixin outline() {
+    outline: 2px solid map.get($colors, 'blue-600');
+    outline-offset: 1.5px;
+}

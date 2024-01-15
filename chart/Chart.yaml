@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mindx-denise-mvp-web
+description: This is helm chart for starter project
+type: application
+version: 0.1.0
+appVersion: latest

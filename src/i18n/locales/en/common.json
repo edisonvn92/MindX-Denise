@@ -1,0 +1,15 @@
+{
+  "en": "English",
+  "vi": "Vietnamese",
+  "name": "Name",
+  "customer": "Customer",
+  "userProfile": "User Profile",
+  "basicInformation": "Basic Information",
+  "setting": "Setting",
+  "logOut": "Log Out",
+  "id": "ID",
+  "createdAt": "Created At",
+  "search": "Search",
+  "course": "Course",
+  "editInformation": "Edit information"
+}

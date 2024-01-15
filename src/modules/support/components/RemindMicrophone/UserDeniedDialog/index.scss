@@ -1,0 +1,17 @@
+.user-denied {
+    max-width: 868px;
+    padding: 24px;
+    align-items: center;
+    border-radius: 16px;
+
+    img {
+        max-width: 398px;
+        flex: 1;
+    }
+
+    div:first-child {
+        div {
+            font-weight: 600;
+        }
+    }
+}

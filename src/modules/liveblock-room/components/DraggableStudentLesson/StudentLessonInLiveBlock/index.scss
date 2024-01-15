@@ -1,0 +1,41 @@
+.border-left {
+    border-left: 1px solid #CFCFCF;
+}
+
+.help-button {
+    position: absolute;
+    right: 40px;
+    bottom: 20%;
+    height: 40px;
+
+}
+
+.help-button-editor {
+    position: absolute;
+    right: 24px;
+    bottom: 10%;
+    height: 40px;
+
+}
+
+.large-indicator {
+    width: 120px;
+    height: 48px;
+}
+
+.medium-indicator {
+    width: 100px;
+    height: 40px;
+}
+
+.switch-button-large {
+    width: 160px;
+    min-width: 160px;
+    height: 200px;
+}
+
+.switch-button-medium {
+    width: 133px;
+    min-width: 133px;
+    height: 166px;
+}

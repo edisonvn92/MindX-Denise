@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-svc
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+    {{- if .Values.service.ports.http.enabled }}
+    - name: http
+      port: {{ .Values.service.ports.http.port }}
+      targetPort: {{ .Values.service.ports.http.targetPort }}
+      {{- if eq $.Values.service.type "NodePort"}}
+      nodePort: {{ .Values.service.ports.http.nodePort }}
+      {{- end }}
+    {{- end }}
+    {{- if .Values.service.ports.grpc.enabled }}
+    - name: grpc
+      port: {{ .Values.service.ports.grpc.port }}
+      targetPort: {{ .Values.service.ports.grpc.targetPort }}
+    {{- end}}

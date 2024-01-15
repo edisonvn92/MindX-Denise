@@ -1,0 +1,105 @@
+@use "sass:map";
+$colorWhite: map.get($colors, 'white');
+$colorBgChecked: map.get($colors, 'gray-600');
+$colorBgCheckedHover: map.get($colors, 'gray-700');
+$colorBgDisabled: map.get($colors, 'gray-500');
+;
+$colorBorderChecked: map.get($colors, 'gray-900');
+$colorBorder: map.get($colors, 'gray-600');
+
+.ant-radio-group {
+    .ant-radio-wrapper {
+        &.mx-radio {
+            &:hover {
+                .ant-radio-checked {
+                    .ant-radio-inner {
+                        border-color: $colorBorder !important;
+                        background-color: $colorBgCheckedHover !important;
+                    }
+                }
+
+                .ant-radio {
+                    .ant-radio-inner {
+                        border: 1px solid $colorBorder !important;
+                    }
+                }
+            }
+
+            &:focus {
+                .ant-radio-inner {
+                    @include outline();
+                }
+
+                .ant-radio {
+                    .ant-radio-inner {
+                        @include outline();
+                    }
+                }
+            }
+
+            .ant-radio:focus {
+                .ant-radio-inner {
+                    @include outline();
+                }
+            }
+
+            .ant-radio-disabled {
+                .ant-radio-inner {
+                    border-color: $colorBorder !important;
+
+                    &::after {
+                        background-color: $colorWhite !important;
+                    }
+                }
+            }
+
+            .ant-radio-checked {
+                .ant-radio-inner {
+                    border-color: $colorBorder !important;
+                    background-color: $colorBgChecked !important;
+                }
+
+                &::after {
+                    background-color: $colorWhite;
+                }
+
+                &.ant-radio-disabled {
+                    .ant-radio-inner {
+                        border-color: $colorBorder !important;
+                        background-color: $colorBgDisabled !important;
+                    }
+
+                    &::after {
+                        background-color: $colorWhite !important;
+                    }
+                }
+            }
+
+            .ant-radio {
+                &:hover {
+                    .ant-radio-inner {
+                        border-color: $colorBorder !important;
+                    }
+                }
+
+                &:focus {
+                    .ant-radio-inner {
+                        @include outline();
+                    }
+                }
+
+                &.ant-radio-disabled {
+                    .ant-radio-inner {
+                        border-color: $colorBorder !important;
+                        background-color: $colorWhite !important;
+                    }
+
+                    &::after {
+                        background-color: $colorWhite !important;
+                    }
+                }
+            }
+        }
+
+    }
+}

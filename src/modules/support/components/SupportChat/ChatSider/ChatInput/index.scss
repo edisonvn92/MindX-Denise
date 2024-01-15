@@ -1,0 +1,15 @@
+.ant-radio-button-wrapper {
+    border-radius: 8px !important;
+    border-color: #7E7E7E !important;
+    padding:5px 8px 8px 8px;
+    height: 40px;
+    &:hover {
+        color: #2C2B2B !important;
+    }
+}
+.ant-radio-button-wrapper-checked {
+    color: #2C2B2B !important;
+    background-color: #FFEAEB !important
+    
+    
+}

@@ -1,0 +1,21 @@
+.tooltip-body {
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    background: var(--white-white, #FFF);
+
+    .tooltip-content {
+        color: var(--light-gray-900, #2C2B2B);
+        font-family: Exo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        margin-bottom: 16px;
+    }
+}

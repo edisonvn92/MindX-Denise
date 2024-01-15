@@ -1,0 +1,56 @@
+@import "@mx/ui/dist/index.css";
+@import "./component-css/index";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: Exo, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+button {
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+    border: none;
+  }
+}
+.text-\[20px\] {
+  font-size: 20px;
+}
+.font-semibold {
+  font-weight: 600;
+}
+
+input, button, select, optgroup, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: none;
+    outline: 0;
+  }
+
+}
+
+.toast {
+  width: 320px;
+
+  > div > div {
+    width: 100%;
+  }
+}
